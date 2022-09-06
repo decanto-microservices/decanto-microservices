@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: decanto-pairing
+spec:
+  parentRefs:
+    - name: api-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /decanto/pairing
+      backendRefs:
+        - kind: Service
+          name: decanto-pairing-service
+          port: 9093
